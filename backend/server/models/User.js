@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { isEmail } from "validator";
+import validate from "validator";
+const { isEmail } = validate;
 
 
 

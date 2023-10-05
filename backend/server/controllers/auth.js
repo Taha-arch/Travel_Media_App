@@ -58,3 +58,21 @@ export const login = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 }
+
+
+// test api setup
+export const test = async (req, res) => {
+  await User.deleteMany({ firstName: 'test' });
+  const salt = await bcrypt.genSalt();
+  const passwordHash = await bcrypt.hash('12345678', salt);
+  const mockUser = new User({ firstName: 'test', lastName: 'test', email: 'test@test.com', password: passwordHash });
+  await mockUser.save();
+  res.status(200).send({ success: true, message: 'Test setup completed' });
+}
+
+
+// teardown api setup
+export const teardown = async (req, res) => {
+  await User.deleteMany({ firstName: 'test' });
+  res.status(200).send({ success: true, message: 'Test teardown completed' });
+};

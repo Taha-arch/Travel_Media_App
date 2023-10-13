@@ -24,7 +24,7 @@ import { Password } from "@mui/icons-material";
     Password: yup.string().required("required"),
     location: yup.string().required("required"),
     occupation: yup.string().required("required"),
-    picture: yup.string().required("required"),
+    picture: yup.string(),
  });
 
  const loginSchema = yup.object().shape({
@@ -58,7 +58,7 @@ import { Password } from "@mui/icons-material";
 
 
   const register = async (values, onSubmitProps) => {
-    console.log(values);
+    console.log(values)
     //this allows us to send form info with image uploaded
     const formData = new FormData();
     for (let value in values) {
@@ -69,7 +69,7 @@ import { Password } from "@mui/icons-material";
     const savedUserResponse = await fetch (
         "http://localhost:3001/auth/register",
         {
-            methode: "POST",
+            method: "POST",
             body: formData,
         }
     );
@@ -86,7 +86,7 @@ import { Password } from "@mui/icons-material";
     const loggedInResponse = await fetch (
         "http://localhost:3001/auth/login",
         {
-            methode: "POST",
+            method: "POST",
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(values),
         }
@@ -104,13 +104,13 @@ import { Password } from "@mui/icons-material";
     }
   }
 
-  const  handleFormSubmit = async (values, onSubmitProps) => {
-    if (isLogin) await  login(values, onSubmitProps);
-    if (isRegister) await register(values, onSubmitProps);
+  const  handleFormSubmit = async (values,onSubmitProps) => {
+    if (isLogin) await  login(values,onSubmitProps);
+    if (isRegister) await register(values,onSubmitProps);
   };
 
   return (
-    <Formik
+  <Formik
     onSubmit={handleFormSubmit}
     initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
     validationSchema={isLogin ? loginSchema : registerSchema}
@@ -137,11 +137,11 @@ import { Password } from "@mui/icons-material";
          {isRegister && (
             <>
             <TextField
-              label="First Name hhhhh"
+              label="First Name"
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.firstName}
-              name="firstname"
+              name="firstName"
               error={Boolean(touched.firstName) && Boolean(errors.firstName)}
               helperText={touched.firstName && errors.firstName}
               sx={{ gridColumn: "span 2"}}
@@ -151,7 +151,7 @@ import { Password } from "@mui/icons-material";
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.lastName}
-              name="lastname"
+              name="lastName"
               error={Boolean(touched.lastName) && Boolean(errors.lastName)}
               helperText={touched.lastName && errors.lastName}
               sx={{ gridColumn: "span 2"}}
@@ -167,13 +167,13 @@ import { Password } from "@mui/icons-material";
               sx={{ gridColumn: "span 4"}}
             />
             <TextField
-              label="Occupation"
+              label="occupation"
               onBlur={handleBlur}
               onChange={handleChange}
-              value={values.Occupation}
-              name="Occupation"
-              error={Boolean(touched.Occupation) && Boolean(errors.Occupation)}
-              helperText={touched.Occupation && errors.Occupation}
+              value={values.occupation}
+              name="occupation"
+              error={Boolean(touched.occupation) && Boolean(errors.occupation)}
+              helperText={touched.occupation && errors.occupation}
               sx={{ gridColumn: "span 4"}}
             />
             <Box
@@ -227,13 +227,13 @@ import { Password } from "@mui/icons-material";
             />
             <TextField
               label="Password"
-              type="password"
+              type="Password"
               onBlur={handleBlur}
               onChange={handleChange}
-              value={values.password}
-              name="password"
-              error={Boolean(touched.password) && Boolean(errors.password)}
-              helperText={touched.password && errors.password}
+              value={values.Password}
+              name="Password"
+              error={Boolean(touched.Password) && Boolean(errors.Password)}
+              helperText={touched.Password && errors.Password}
               sx={{ gridColumn: "span 4"}}
             />
 
